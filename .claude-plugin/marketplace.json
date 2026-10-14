@@ -1,0 +1,7 @@
+{
+  "name": "code-env-mod",
+  "owner": { "name": "Roberto" },
+  "plugins": [
+    { "name": "system-variables", "source": "./" }
+  ]
+}

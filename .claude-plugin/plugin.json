@@ -1,0 +1,9 @@
+{
+  "name": "system-variables",
+  "version": "0.2.0",
+  "description": "Small pane that shows environment variables (e.g. CLAUDE_CONFIG_DIR) and slash commands to test which ones can be changed. Works on Windows, macOS and Linux.",
+  "author": { "name": "Roberto" },
+  "license": "MIT",
+  "repository": "https://github.com/GrossoRoberto/code-env-mod",
+  "types": "./types/index.d.ts"
+}
