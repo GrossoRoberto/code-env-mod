@@ -85,6 +85,11 @@ const report = (c: Check) =>
   `${c.name}: process=${c.inProcess ?? NOT_SET}; child=${c.inChild ?? NOT_SET}`
 
 export const register: Register = on => {
+  // An open the plugin makes on its own waits undrawn on a narrow terminal (under 144 columns);
+  // one answering the person's input is placed at any width. So if the session-start open
+  // was not drawn, the first prompt opens it again.
+  let isDrawn = false
+
   on('session.start', async ($, e, next) => {
     await $.command.register({ name: 'env', description: 'Open the environment variables pane' })
     await $.command.register({ name: 'env-all', description: 'List every variable of the process (secrets masked)' })
@@ -94,7 +99,22 @@ export const register: Register = on => {
     const rows = await readAll($)
     await update($, rowsAtom, () => rows)
     await update($, originalsAtom, () => rows)
-    void $.ui.open({ id: PANE, title: 'Variables', ...measure(rows, null) })
+    const opened = await $.ui.open({ id: PANE, title: 'Variables', ...measure(rows, null) })
+    isDrawn = opened.isPlaced
+
+    return next(e)
+  })
+
+  on('prompt.submit', async ($, e, next) => {
+    if (!isDrawn) {
+      isDrawn = true
+      await refresh($)
+      void $.ui.open({
+        id: PANE,
+        title: 'Variables',
+        ...measure(await read($, rowsAtom), await read($, lastCheckAtom)),
+      })
+    }
 
     return next(e)
   })

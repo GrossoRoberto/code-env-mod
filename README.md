@@ -6,7 +6,7 @@ Works on Windows, macOS and Linux.
 
 ## Pane
 
-Opens by itself at session start (and with `/env`), sized to its content.
+Opens by itself at session start (and with `/env`), sized to its content. If the terminal is too narrow for the pane to be drawn at start (under 144 columns), it opens when you send your first message.
 Shows `CLAUDE_CONFIG_DIR`, `CLAUDE_CODE_PLUGIN_DIRS`, `MOD_ENV_TEST` always, plus the host,
 user, home and temp variables of the current OS when they are set. Names are orange; `*` marks editable ones.
 
