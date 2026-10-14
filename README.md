@@ -10,6 +10,18 @@ Opens by itself at session start (and with `/env`), sized to its content.
 Shows `CLAUDE_CONFIG_DIR`, `CLAUDE_CODE_PLUGIN_DIRS`, `MOD_ENV_TEST` always, plus the host,
 user, home and temp variables of the current OS when they are set. Names are orange; `*` marks editable ones.
 
+## Screenshots
+
+The pane (names in orange, `*` marks the editable ones):
+
+![Variables pane](doc/pane.png)
+
+Inside Claude Code, with the pane docked on the right and the output of `/env-all`:
+
+![Terminal with the pane and /env-all](doc/terminal.png)
+
+Personal values (user name, computer name, profile paths) are pixelated.
+
 ## Commands
 
 | Command | What it does |
